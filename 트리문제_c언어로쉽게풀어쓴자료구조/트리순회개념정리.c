@@ -170,3 +170,63 @@ int main() {
 	level_inorder(root);
 	return 0;
 }
+
+//4번
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+#include<memory.h>
+#define max_size 100
+typedef struct treenode {
+	int data;
+	struct treenode *left, *right;
+}treenode;
+int get_node_count(treenode *node) {//노드 개수
+	int count = 0;
+	if (node != NULL) {
+		count = 1+ get_node_count(node->left) + get_node_count(node->right);
+	}
+	return count;
+}
+int Max(int a, int b) {//트리 높이
+	if (a > b) {
+		return a;
+	}
+	if (a < b) {
+		return b;
+	}
+}
+
+int get_height(treenode *node) {//트리 높이
+	int height = 0;
+	if (node != NULL) {
+		height = 1 + Max(get_height(node->left),get_height(node->right));
+	}
+	return height;
+}
+int get_single_node(treenode *node) {//단말노드 개수
+	int count = 0;
+	if (node != NULL) {
+		if (node->left == NULL && node->right == NULL) {
+			return 1;
+		}
+		else {
+			count = get_single_node(node->left) + get_single_node(node->right);
+		}
+	}
+	return count;
+}
+int main() {
+	treenode n1 = { 1,NULL,NULL };
+	treenode n2 = { 4,&n1,NULL };
+	treenode n3 = { 16,NULL,NULL };
+	treenode n4 = { 25,NULL,NULL };
+	treenode n5 = { 20,&n3,&n4 };
+	treenode n6 = { 15,&n2,&n5 };
+	treenode *root = &n6;
+	printf("노드 개수 %d 입니다\n", get_node_count(root));
+	printf("트리 높이 %d 입니다.\n", get_height(root));
+	printf("단말노드 개수 %d 입니다.\n", get_single_node(root));
+	return 0;
+}
+
