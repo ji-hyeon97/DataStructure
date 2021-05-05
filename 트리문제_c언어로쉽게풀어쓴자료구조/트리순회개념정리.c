@@ -1,4 +1,4 @@
-//¼øÈ¸°³³äÁ¤¸®
+//1ë²ˆ <ìž¬ê·€>
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 typedef struct treenode {
@@ -12,21 +12,21 @@ treenode n4 = { 25,NULL,NULL };
 treenode n5 = { 20,&n3,&n4 };
 treenode n6 = { 15,&n2,&n5 };
 treenode *root = &n6;
-inorder(treenode *root) {//ÁßÀ§¼øÈ¸
+inorder(treenode *root) {//ì¤‘ìœ„ìˆœíšŒ
 	if (root) {
 		inorder(root->left);
 		printf("%d ", root->data);
 		inorder(root->right);
 	}
 }
-preorder(treenode *root) {//ÀüÀ§¼øÈ¸
+preorder(treenode *root) {//ì „ìœ„ìˆœíšŒ
 	if (root) {
 		printf("%d ", root->data);
 		preorder(root->left);
 		preorder(root->right);
 	}
 }
-postorder(treenode *root) {//ÈÄÀ§¼øÈ¸
+postorder(treenode *root) {//í›„ìœ„ìˆœíšŒ
 	if (root) {
 		postorder(root->left);
 		postorder(root->right);
@@ -34,14 +34,63 @@ postorder(treenode *root) {//ÈÄÀ§¼øÈ¸
 	}
 }
 int main() {
-	printf("ÁßÀ§¼øÈ¸ : ");
+	printf("ì¤‘ìœ„ìˆœíšŒ : ");
 	inorder(root);
 	printf("\n");
-	printf("ÀüÀ§¼øÈ¸ : ");
+	printf("ì „ìœ„ìˆœíšŒ : ");
 	preorder(root);
 	printf("\n");
-	printf("ÈÄÀ§¼øÈ¸ : ");
+	printf("í›„ìœ„ìˆœíšŒ : ");
 	postorder(root);
 	printf("\n");
+	return 0;
+}
+
+//2ë²ˆ <ìŠ¤íƒ íŠ¸ë¦¬ ì¤‘ìœ„ìˆœíšŒ>
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+#include<memory.h>
+#define max_size 100
+typedef struct treenode {
+	int data;
+	struct treenode *left, *right;
+}treenode;
+int top = -1;
+treenode *stack[max_size];
+void push(treenode *p) {
+	if (top < max_size - 1) {
+		stack[++top] = p;
+	}
+}
+treenode *pop() {
+	treenode *p = NULL;
+	if (top >= 0) {
+		p = stack[top--];
+	}
+	return p;
+}
+void inorder(treenode *root) {
+	while (1) {
+		for (; root; root = root->left) {
+			push(root);
+		}
+		root = pop();
+		if (!root) {
+			break;
+		}
+		printf("%d ", root->data);
+		root = root->right;
+	}
+}
+int main() {
+	treenode n1 = { 1,NULL,NULL };
+	treenode n2 = { 4,&n1,NULL };
+	treenode n3 = { 16,NULL,NULL };
+	treenode n4 = { 25,NULL,NULL };
+	treenode n5 = { 20,&n3,&n4 };
+	treenode n6 = { 15,&n2,&n5 };
+	treenode *root = &n6;
+	inorder(root);
 	return 0;
 }
