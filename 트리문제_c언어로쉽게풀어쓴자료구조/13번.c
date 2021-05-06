@@ -27,7 +27,7 @@ int isBalanced(treenode *node) {
 	}
 	int leftHeight = get_height(node->left);
 	int rightHeight = get_height(node->right);
-	if((leftHeight - rightHeight) <= 1 && (leftHeight - rightHeight) >= -1 && isBalanced(node->left) && isBalanced(node->right))
+	if((leftHeight - rightHeight) <= 1 && (leftHeight - rightHeight) >= -1)
 		return 1;
 	return 0;
 
@@ -45,8 +45,8 @@ int main() {
 	treenode a2 = { 2,&a1,NULL };
 	treenode a3 = { 3,&a2,NULL };
 	treenode *root1 = &a3;
-	printf("1ÀÌ ³ª¿À¸é ±ÕÇüÆ®¸® 0ÀÌ ³ª¿À¸é ±ÕÇüÆ®¸® ¾Æ´Ô\n");
-	printf("13¹ø¹®Ç×ÀÇ ´äÀº:%d ÀÔ´Ï´Ù. <±ÕÇüÆ®¸® n> \n", isBalanced(root));
-	printf("13¹ø¹®Ç×ÀÇ ´äÀº:%d ÀÔ´Ï´Ù. <±ÕÇüÆ®¸®¾Æ´Ô a> \n", isBalanced(root1));
+	printf("1ì´ ë‚˜ì˜¤ë©´ ê· í˜•íŠ¸ë¦¬ 0ì´ ë‚˜ì˜¤ë©´ ê· í˜•íŠ¸ë¦¬ ì•„ë‹˜\n");
+	printf("13ë²ˆë¬¸í•­ì˜ ë‹µì€:%d ì…ë‹ˆë‹¤. <ê· í˜•íŠ¸ë¦¬ n> \n", isBalanced(root));
+	printf("13ë²ˆë¬¸í•­ì˜ ë‹µì€:%d ì…ë‹ˆë‹¤. <ê· í˜•íŠ¸ë¦¬ì•„ë‹˜ a> \n", isBalanced(root1));
 	return 0;
 }
