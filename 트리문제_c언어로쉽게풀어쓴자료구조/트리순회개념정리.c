@@ -229,4 +229,129 @@ int main() {
 	printf("단말노드 개수 %d 입니다.\n", get_single_node(root));
 	return 0;
 }
+//연습
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include<stdlib.h>
+#define max_size 100
+typedef struct treenode {
+	int valid;
+	int data;
+	struct treenode *left;
+	struct treenode *right;
+}treenode;
+treenode tree[max_size];
+void init() {
+	for (int i = 0; i < max_size; i++) {
+		tree[i].valid = 0;
+		tree[i].data = -1;
+		tree[i].left = tree[i].right = NULL;
+	}
+}
+int empty(int index) {
+	return tree[index].valid == 0;
+}
+void insert(int index, int data) {
+	if (empty(index)) {
+		tree[index].data = data;
+		tree[index].valid = 1;
+		if (index == 0) {
+			return;
+		}
+		int parent_index = (index - 1) / 2;
+		if (index % 2 == 0) {
+			tree[parent_index].right = &tree[index];
+		}
+		else {
+			tree[parent_index].left = &tree[index];
+		}
+		return;
+	}
+	if (data < tree[index].data) {
+		insert(index * 2 + 1, data);
+	}
+	else {
+		insert(index * 2 + 2, data);
+	}	
+}	
+void dfs_preorder(int index) {
+	printf("%d ",tree[index].data);
+	if (tree[index].left != NULL) {
+		dfs_preorder(index * 2 + 1);
+	}
+	if (tree[index].right != NULL) {
+		dfs_preorder(index * 2 + 2);
+	}
+} 
+treenode *queue[max_size];
+int front, rear;
+void init_q() {
+	for (int i = 0; i < max_size; i++) {
+		queue[i] = NULL;
+	}
+	front = rear = -1;
+}
+int empty_q() {
+	if (front == -1 && rear == -1) {
+		return 1;
+	}
+	return 0;
+}
+void enqueue(treenode* node) {
+	queue[++rear] = node;
+	if (front == -1) {
+		front++;
+	}
+}
+treenode *dequeue() {
+	treenode *node = queue[front];
+	if (front == rear) {
+		front = rear = -1;
+	}
+	else {
+		front++;
+	}
+	return node;
+}
+void bfs() {
+	treenode *node = &tree[0];
+	init_q();
+	while (node != NULL) {
+		printf("%d ", node->data);
+		if (node->left != NULL) {
+			enqueue(node->left);
+		}
+		if (node->right != NULL) {
+			enqueue(node->right);
+		}
+		if (!empty_q()) {
+			node = dequeue();
+		}
+		else {
+			node = NULL;
+		}
+	}
+}
+void bfsArray(int a) {
+	for (int i = 0; i < max_size; i++) {
+		if (tree[i].valid) {
+			printf("%d ", tree[i].data);
+		}
+	}
+	printf("\nrea %d ", tree[a].data);
+} 
+int main() {
+	init();
+	insert(0, 825);
+	insert(0, 162);
+	insert(0, 768);
+	insert(0, 724);
+	insert(0, 635);	
+	dfs_preorder(0);
+	printf("\n");
+	bfs();
+	printf("\n");
+	bfsArray(19);
+	return 0;
+}
 
