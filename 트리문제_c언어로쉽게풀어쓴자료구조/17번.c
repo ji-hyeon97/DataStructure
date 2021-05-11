@@ -54,7 +54,7 @@ int main() {
 	treenode n6 = { 1,&n3,&n4 };
 	treenode n7 = { 3,&n5,&n6 };
 	treenode *root = &n7; 
-	printf("�ּڰ� : %d\n", explore_min(root));
-	printf("�ִ� : %d\n", explore_max(root));
+	printf("최소값 : %d\n", explore_min(root));
+	printf("최대값 : %d\n", explore_max(root));
 	return 0;
 }
