@@ -354,4 +354,149 @@ int main() {
 	bfsArray(19);
 	return 0;
 }
-
+//연습2
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#define max_size 100
+typedef struct treenode{
+	int data;
+	struct treenode *left;
+	struct treenode *right;
+}treenode;
+int top = -1;
+int stack[max_size];
+void push(treenode *root) {
+	if (top < max_size - 1) {
+		stack[++top] = root;
+	}
+}
+treenode *pop() {
+	treenode *root = NULL;
+	if (top >= 0) {
+		root = stack[top--];
+	}
+	return root;
+}
+void inorder(treenode *root) {
+	while (1) {
+		for (; root; root = root->left) {
+			push(root);
+		}
+		root = pop();
+		if (!root) {
+			break;
+		}
+		//printf("%d ", root->data);
+		root = root->right;
+	}
+}
+treenode *root = NULL;
+void init() {
+	treenode *root = NULL;
+	root->data = NULL;
+	root->left = root->right = NULL;
+}
+treenode *BST_insert(treenode *root, int data){
+	if (root == NULL)	{
+		root = (treenode*)malloc(sizeof(treenode));
+		root->left = root->right = NULL;
+		root->data = data;
+		return root;
+	}
+	else {
+		if (root->data > data) {
+			root->left = BST_insert(root->left, data);
+		}
+		else {
+			root->right = BST_insert(root->right, data);
+		}
+	}
+	return root;
+}
+treenode* BST_search(treenode* root, int data){
+	if (root == NULL) {
+		return NULL;
+	}
+	if (root->data == data) {
+		return root;
+	}
+	else if (root->data > data) {
+		return BST_search(root->left, data);
+	}
+	else {
+		return BST_search(root->right, data);
+	}
+}
+void BST_print(treenode* root){
+	if (root == NULL) {
+		return;
+	}	
+	printf("%d ", root->data);
+	BST_print(root->left);
+	BST_print(root->right);
+}
+typedef struct queuetype {
+	int queue[max_size];
+	int front, rear;
+}queuetype;
+void init_q(queuetype *q) {
+	q->front = q->rear = 0;
+	return;
+}
+int empty(queuetype *q) {
+	return (q->rear == q->front);
+}
+int full(queuetype *q) {
+	return ((q->rear + 1) % max_size == q->front);
+}
+void enqueue(queuetype *q, int item) {
+	if (full(q)) {
+		exit(1);
+	}
+	else {
+		q->rear = (q->rear + 1) % max_size;
+		q->queue[q->rear] = item;
+	}
+	return;
+}
+int dequeue(queuetype *q) {
+	if (empty(q)) {
+		exit(1);
+	}
+	else {
+		q->front = (q->front + 1) % max_size;
+		return q->queue[q->front];
+	}
+}
+void level_inorder(treenode *n) {
+	queuetype q;
+	init_q(&q);
+	if (n == NULL) {
+		return;
+	}
+	else {
+		enqueue(&q, n);
+		while (!empty(&q)) {
+			n = dequeue(&q);
+			printf("%d \n", n->data);
+			if (n->left) {
+				enqueue(&q, n->left);
+			}
+			if (n->right) {
+				enqueue(&q, n->right);
+			}
+		}
+	}
+	return;
+}
+int main(){
+	root = BST_insert(root, 825);
+	root = BST_insert(root, 162);
+	root = BST_insert(root, 768);
+	root = BST_insert(root, 724);
+	root = BST_insert(root, 635); 
+	root = BST_insert(root, 935);
+	level_inorder(root,3);
+	BST_print(root);
+}
