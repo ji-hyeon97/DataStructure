@@ -24,6 +24,6 @@ int main() {
 	treenode n6 = { 1,&n3,&n4 };
 	treenode n7 = { 3,&n5,&n6 };
 	treenode *root = &n7;
-	printf("³ëµåÀÇ ÇÕÀº %dÀÔ´Ï´Ù.\n", sum(root));	
+	printf("ëª¨ë“  ë…¸ë“œì˜ í•©ì€ %d ì…ë‹ˆë‹¤.\n", sum(root));	
 	return 0;
 }
