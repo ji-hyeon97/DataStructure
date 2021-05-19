@@ -1,134 +1,135 @@
-#define _CRT_SECURE_NO_WARNINGS//visual studioÀÇ º¸¾È°ü·Ã ¹®Á¦¸¦ ¹«½ÃÇÏ°Ú½À´Ï´Ù.
-#pragma warning(disable : 4047)//Å¥ ±¸Á¶Ã¼¿Í Æ®¸® ±¸Á¶Ã¼ »çÀÌ¿¡¼­ÀÇ °£Á¢ ÂüÁ¶¹Ş´Â ¹®¹ıÀûÀÎ ºÎºĞ(intÇü)¿¡¼­ È¤½Ã³ª build°¡ µÇÁö ¾ÊÀ»±îºÁ ÀÛ¼ºÇß½À´Ï´Ù.
-#pragma warning(disable : 4024)//Å¥ ±¸Á¶Ã¼¿Í Æ®¸® ±¸Á¶Ã¼ »çÀÌ¿¡¼­ÀÇ °£Á¢ ÂüÁ¶¹Ş´Â ¹®¹ıÀûÀÎ ºÎºĞ(intÇü)¿¡¼­ È¤½Ã³ª build°¡ µÇÁö ¾ÊÀ»±îºÁ ÀÛ¼ºÇß½À´Ï´Ù.
-#include <stdio.h>//Ãâ·Â, µîÀÇ ±â´ÉÀ» Á¦°øÇÕ´Ï´Ù.
-#include <stdlib.h>//Æ®¸®¿¡¼­ÀÇ µ¿ÀûÇÒ´çÀ» À§ÇØ ÀÛ¼ºÇÏ¿´½À´Ï´Ù.
-#define max_size 100//max_size´Â 100À¸·Î Á¤ÀÇÇÏ°Ú½À´Ï´Ù.
-typedef struct treenode {//treenodeÀÇ ±¸Á¶Ã¼
-	int data;//Á¤¼ö data°ª
-	struct treenode *left;//¸µÅ©ÇÊµå ¿ŞÂÊ
-	struct treenode *right;//¸µÅ©ÇÊµå ¿À¸¥ÂÊ
-}treeNode;//±¸Á¶Ã¼ ÀÌ¸§Àº treeNodeÀÔ´Ï´Ù.
-typedef struct queuetype {//queue±¸Á¶Ã¼ ÀÛ¼º
-	int queue[max_size];//Á¤¼öÇü queueÀÇ ¹è¿­
-	int front, rear;//¿øÇüÅ¥¸¦ ÀÛ¼ºÇÏ±â À§ÇØ¼­ ÇÊ¿äÇÑ °³³ä
-}queuetype;//±¸Á¶Ã¼ÀÌ¸§ÀºqueuetypeÀÔ´Ï´Ù.
-void init_q(queuetype *q) {//ÃÊ±âÈ­
-	q->front = q->rear = 0;//ÃÊ±âÈ­ »óÈ²ÀÔ´Ï´Ù.
-	return;//Á¾·á
+#define _CRT_SECURE_NO_WARNINGS//visual studioì˜ ë³´ì•ˆê´€ë ¨ ë¬¸ì œë¥¼ ë¬´ì‹œí•˜ê² ìŠµë‹ˆë‹¤.
+#pragma warning(disable : 4047)//í êµ¬ì¡°ì²´ì™€ íŠ¸ë¦¬ êµ¬ì¡°ì²´ ì‚¬ì´ì—ì„œì˜ ê°„ì ‘ ì°¸ì¡°ë°›ëŠ” ë¬¸ë²•ì ì¸ ë¶€ë¶„(intí˜•)ì—ì„œ í˜¹ì‹œë‚˜ buildê°€ ë˜ì§€ ì•Šì„ê¹Œë´ ì‘ì„±í–ˆìŠµë‹ˆë‹¤.
+#pragma warning(disable : 4024)//í êµ¬ì¡°ì²´ì™€ íŠ¸ë¦¬ êµ¬ì¡°ì²´ ì‚¬ì´ì—ì„œì˜ ê°„ì ‘ ì°¸ì¡°ë°›ëŠ” ë¬¸ë²•ì ì¸ ë¶€ë¶„(intí˜•)ì—ì„œ í˜¹ì‹œë‚˜ buildê°€ ë˜ì§€ ì•Šì„ê¹Œë´ ì‘ì„±í–ˆìŠµë‹ˆë‹¤.
+#include <stdio.h>//ì¶œë ¥, ë“±ì˜ ê¸°ëŠ¥ì„ ì œê³µí•©ë‹ˆë‹¤.
+#include <stdlib.h>//íŠ¸ë¦¬ì—ì„œì˜ ë™ì í• ë‹¹ì„ ìœ„í•´ ì‘ì„±í•˜ì˜€ìŠµë‹ˆë‹¤.
+#define max_size 100//max_sizeëŠ” 100ìœ¼ë¡œ ì •ì˜í•˜ê² ìŠµë‹ˆë‹¤.
+typedef struct treenode {//treenodeì˜ êµ¬ì¡°ì²´
+	int data;//ì •ìˆ˜ dataê°’
+	struct treenode *left;//ë§í¬í•„ë“œ ì™¼ìª½
+	struct treenode *right;//ë§í¬í•„ë“œ ì˜¤ë¥¸ìª½
+}treeNode;//êµ¬ì¡°ì²´ ì´ë¦„ì€ treeNodeì…ë‹ˆë‹¤.
+typedef struct queuetype {//queueêµ¬ì¡°ì²´ ì‘ì„±
+	int queue[max_size];//ì •ìˆ˜í˜• queueì˜ ë°°ì—´
+	int front, rear;//ì›í˜•íë¥¼ ì‘ì„±í•˜ê¸° ìœ„í•´ì„œ í•„ìš”í•œ ê°œë…
+}queuetype;//êµ¬ì¡°ì²´ì´ë¦„ì€queuetypeì…ë‹ˆë‹¤.
+void init_q(queuetype *q) {//ì´ˆê¸°í™”
+	q->front = q->rear = 0;//ì´ˆê¸°í™” ìƒí™©ì…ë‹ˆë‹¤.
+	return;//ì¢…ë£Œ
 }
-int empty(queuetype *q) {//ºñ¾îÀÖ´Â°æ¿ì
-	return (q->rear == q->front);//Å¥°¡ ºñ¾îÀÖ´Â »óÈ²ÀÔ´Ï´Ù.
+int empty(queuetype *q) {//ë¹„ì–´ìˆëŠ”ê²½ìš°
+	return (q->rear == q->front);//íê°€ ë¹„ì–´ìˆëŠ” ìƒí™©ì…ë‹ˆë‹¤.
 }
-int full(queuetype *q) {//°¡µæÂù°æ¿ì
-	return ((q->rear + 1) % max_size == q->front);// Å¥°¡ °¡µæÂù »óÈ²ÀÔ´Ï´Ù.(¿øÇüÅ¥)
+int full(queuetype *q) {//ê°€ë“ì°¬ê²½ìš°
+	return ((q->rear + 1) % max_size == q->front);// íê°€ ê°€ë“ì°¬ ìƒí™©ì…ë‹ˆë‹¤.(ì›í˜•í)
 }
-void enqueue(queuetype *q, int item) {//Å¥ ¹è¿­¿¡ »ğÀÔ
-	if (full(q)) {//Å¥°¡ °¡µæÂ÷ÀÖ´Â °æ¿ì
-		exit(1);//ÇÁ·Î±×·¥ Á¾·á
+void enqueue(queuetype *q, int item) {//í ë°°ì—´ì— ì‚½ì…
+	if (full(q)) {//íê°€ ê°€ë“ì°¨ìˆëŠ” ê²½ìš°
+		exit(1);//í”„ë¡œê·¸ë¨ ì¢…ë£Œ
 	}
-	else {//Å¥°¡ °¡µæÂ÷ ÀÖÁö ¾Ê´Â °æ¿ì
-		q->rear = (q->rear + 1) % max_size;//rear°ª Áõ°¡
-		q->queue[q->rear] = item;//Á¤¼ö »ğÀÔ
+	else {//íê°€ ê°€ë“ì°¨ ìˆì§€ ì•ŠëŠ” ê²½ìš°
+		q->rear = (q->rear + 1) % max_size;//rearê°’ ì¦ê°€
+		q->queue[q->rear] = item;//ì •ìˆ˜ ì‚½ì…
 	}
-	return;//Á¾·á
+	return;//ì¢…ë£Œ
 }
-int dequeue(queuetype *q) {//ÃßÃâ
-	if (empty(q)) {//Å¥°¡ ºñ¾îÀÖ´Â °æ¿ì
-		exit(1);//ÇÁ·Î±×·¥ Á¾·á
+int dequeue(queuetype *q) {//ì¶”ì¶œ
+	if (empty(q)) {//íê°€ ë¹„ì–´ìˆëŠ” ê²½ìš°
+		exit(1);//í”„ë¡œê·¸ë¨ ì¢…ë£Œ
 	}
-	else {//Å¥°¡ ºñ¾îÀÖÁö ¾Ê´Â °æ¿ì
-		q->front = (q->front + 1) % max_size;//front°ª Áõ°¡(¿øÇüÅ¥¿¡¼­´Â Ã³À½ front°ªÀº null°ªÀÔ´Ï´Ù.)
-		return q->queue[q->front];//Á¤¼ö ÃßÃâ
+	else {//íê°€ ë¹„ì–´ìˆì§€ ì•ŠëŠ” ê²½ìš°
+		q->front = (q->front + 1) % max_size;//frontê°’ ì¦ê°€(ì›í˜•íì—ì„œëŠ” ì²˜ìŒ frontê°’ì€ nullê°’ì…ë‹ˆë‹¤.)
+		return q->queue[q->front];//ì •ìˆ˜ ì¶”ì¶œ
 	}
 }
-treeNode *makeNode(int value) {//³ëµå »ı¼º
-	treeNode *node = (treeNode *)malloc(sizeof(treeNode));//µ¿ÀûÇÒ´ç
-	node->data = value;//³ëµåÀÇ µ¥ÀÌÅÍ °ªÀ¸·Î value¸¦ ¹ŞÀ½
-	node->left = node->right = NULL;//´Ü¸»³ëµå
-	return node;//³ëµå¹İÈ¯
+treeNode *makeNode(int value) {//ë…¸ë“œ ìƒì„±
+	treeNode *node = (treeNode *)malloc(sizeof(treeNode));//ë™ì í• ë‹¹
+	node->data = value;//ë…¸ë“œì˜ ë°ì´í„° ê°’ìœ¼ë¡œ valueë¥¼ ë°›ìŒ
+	node->left = node->right = NULL;//ë‹¨ë§ë…¸ë“œ
+	return node;//ë…¸ë“œë°˜í™˜
 }
-treeNode *BST_insert(treeNode *root, int data) {//BSTÆ®¸®±¸Á¶¸¦ ÀÛ¼ºÇÏ°Ú½À´Ï´Ù.
-	if (root == NULL) {//°ªÀÌ ¾ø´Â °æ¿ì
-		root = makeNode(data);//Ã³À½°ªÀ» root·Î ¼³Á¤
+treeNode *BST_insert(treeNode *root, int data) {//BSTíŠ¸ë¦¬êµ¬ì¡°ë¥¼ ì‘ì„±í•˜ê² ìŠµë‹ˆë‹¤.
+	if (root == NULL) {//ê°’ì´ ì—†ëŠ” ê²½ìš°
+		root = makeNode(data);//ì²˜ìŒê°’ì„ rootë¡œ ì„¤ì •
 	}
-	else {//°ªÀÌ ÀÖ´Â °æ¿ì
-		if (root->data > data)//·çÆ®ÀÇ µ¥ÀÌÅÍ °ªÀÌ »õ·Î µé¾î¿À´Â µ¥ÀÌÅÍº¸´Ù Å« °æ¿ì
-			root->left = BST_insert(root->left, data);//¸µÅ©ÇÊµå¸¦ ÅëÇØ ¿ŞÂÊÀ¸·Î ÀÌµ¿
-		else//·çÆ®ÀÇ µ¥ÀÌÅÍ °ªÀÌ »õ·Î µé¾î¿À´Â µ¥ÀÌÅÍº¸´Ù ÀÛÀº °æ¿ì
-			root->right = BST_insert(root->right, data);//¸µÅ©ÇÊµå¸¦ ÅëÇØ ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿
+	else {//ê°’ì´ ìˆëŠ” ê²½ìš°
+		if (root->data > data)//ë£¨íŠ¸ì˜ ë°ì´í„° ê°’ì´ ìƒˆë¡œ ë“¤ì–´ì˜¤ëŠ” ë°ì´í„°ë³´ë‹¤ í° ê²½ìš°
+			root->left = BST_insert(root->left, data);//ë§í¬í•„ë“œë¥¼ í†µí•´ ì™¼ìª½ìœ¼ë¡œ ì´ë™
+		else//ë£¨íŠ¸ì˜ ë°ì´í„° ê°’ì´ ìƒˆë¡œ ë“¤ì–´ì˜¤ëŠ” ë°ì´í„°ë³´ë‹¤ ì‘ì€ ê²½ìš°
+			root->right = BST_insert(root->right, data);//ë§í¬í•„ë“œë¥¼ í†µí•´ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™
 	}
-	return root;//·çÆ®¹İÈ¯
+	return root;//ë£¨íŠ¸ë°˜í™˜
 }
-void DFS(treeNode *root, int *count, int aimNumber, int *answer) {//dfsÅ½»ö
-	if (!root) {//Æ®¸®°¡ ¾ø´Â °æ¿ì
-		return;//Á¾·á
+void DFS(treeNode *root, int *count, int aimNumber, int *answer) {//dfsíƒìƒ‰
+	if (!root) {//íŠ¸ë¦¬ê°€ ì—†ëŠ” ê²½ìš°
+		return;//ì¢…ë£Œ
 	}
-	if (*count > aimNumber) {//count°ªÀÌ aimNumber°ªº¸´Ù Å«°æ¿ì
-		return;//Á¾·á
+	if (*count > aimNumber) {//countê°’ì´ aimNumberê°’ë³´ë‹¤ í°ê²½ìš°
+		return;//ì¢…ë£Œ
 	}
-	if (*count == aimNumber) {//count°ªÀÌ¶û aimNumber°ªÀÌ¶û °°Àº °æ¿ì
-		*answer = root->data;//±× Å½»ö°ªÀ» answerÀÌ¶ó´Â ÁÖ¼Ò¿¡ ÀúÀåÇÏ°Ú½À´Ï´Ù.
-		return;//Á¾·á
+	if (*count == aimNumber) {//countê°’ì´ë‘ aimNumberê°’ì´ë‘ ê°™ì€ ê²½ìš°
+		*count += 1;
+		*answer = root->data;//ê·¸ íƒìƒ‰ê°’ì„ answerì´ë¼ëŠ” ì£¼ì†Œì— ì €ì¥í•˜ê² ìŠµë‹ˆë‹¤.
+		return;//ì¢…ë£Œ
 	}
-	*count += 1;//count°ªÀÌ aimNumber°ªº¸´Ù ÀÛÀº °æ¿ì
-	DFS(root->left, count, aimNumber, answer);//¿ŞÂÊÀ¸·Î Å½»ö
-	DFS(root->right, count, aimNumber, answer);//¿À¸¥ÂÊÀ¸·Î Å½»ö
+	*count += 1;//countê°’ì´ aimNumberê°’ë³´ë‹¤ ì‘ì€ ê²½ìš°
+	DFS(root->left, count, aimNumber, answer);//ì™¼ìª½ìœ¼ë¡œ íƒìƒ‰
+	DFS(root->right, count, aimNumber, answer);//ì˜¤ë¥¸ìª½ìœ¼ë¡œ íƒìƒ‰
 }
-void BFS(treeNode *root, int *count, int aimNumber, int *answer) {//bfsÅ½»ö
-	queuetype q;//±¸Á¶Ã¼ queuetypeÀÇ º¯¼ö q (ÀÎ½ºÅÏ½º ¿ªÇÒ)
-	init_q(&q);//ÃÊ±âÈ­
-	if (!root)//°ªÀÌ ¾ø´Â °æ¿ì
-		return;//Á¾·á
-	else {//°ªÀÌ ÀÖ´Â°æ¿ì
-		enqueue(&q, root);//queue¹è¿­¿¡ ³ÖÀ½
-		while (!empty(&q)) {//ºñ¾îÀÖÁö ¾Ê´Â °æ¿ì ¹«ÇÑ¹İº¹
-			root = dequeue(&q);//queue¹è¿­¿¡¼­ ÃßÃâ
-			++(*count);//count°ªÁõ°¡
-			if (*count == aimNumber + 1) {//++count Çü½ÄÀ¸·Î ÄÚµå¸¦ ÀÛ¼ºÇØ¼­ +1ÇØÁİ´Ï´Ù.
-				*answer = root->data;//¿øÇÏ´Â °ª µµÃâ
-				return;//Á¾·á
+void BFS(treeNode *root, int *count, int aimNumber, int *answer) {//bfsíƒìƒ‰
+	queuetype q;//êµ¬ì¡°ì²´ queuetypeì˜ ë³€ìˆ˜ q (ì¸ìŠ¤í„´ìŠ¤ ì—­í• )
+	init_q(&q);//ì´ˆê¸°í™”
+	if (!root)//ê°’ì´ ì—†ëŠ” ê²½ìš°
+		return;//ì¢…ë£Œ
+	else {//ê°’ì´ ìˆëŠ”ê²½ìš°
+		enqueue(&q, root);//queueë°°ì—´ì— ë„£ìŒ
+		while (!empty(&q)) {//ë¹„ì–´ìˆì§€ ì•ŠëŠ” ê²½ìš° ë¬´í•œë°˜ë³µ
+			root = dequeue(&q);//queueë°°ì—´ì—ì„œ ì¶”ì¶œ
+			++(*count);//countê°’ì¦ê°€
+			if (*count == aimNumber + 1) {//++count í˜•ì‹ìœ¼ë¡œ ì½”ë“œë¥¼ ì‘ì„±í•´ì„œ +1í•´ì¤ë‹ˆë‹¤.
+				*answer = root->data;//ì›í•˜ëŠ” ê°’ ë„ì¶œ
+				return;//ì¢…ë£Œ
 			}
-			if (root->left) {//¿ŞÂÊÅ½»ö
-				enqueue(&q, root->left);//¿ŞÂÊ°ªÀ» queue¹è¿­¿¡ ³ÖÀ½
+			if (root->left) {//ì™¼ìª½íƒìƒ‰
+				enqueue(&q, root->left);//ì™¼ìª½ê°’ì„ queueë°°ì—´ì— ë„£ìŒ
 			}
-			if (root->right) {//¿À¸¥ÂÊ Å½»ö
-				enqueue(&q, root->right);//¿À¸¥ÂÊ °ªÀ» queue¹è¿­¿¡ ³ÖÀ½
+			if (root->right) {//ì˜¤ë¥¸ìª½ íƒìƒ‰
+				enqueue(&q, root->right);//ì˜¤ë¥¸ìª½ ê°’ì„ queueë°°ì—´ì— ë„£ìŒ
 			}
 		}
 	}
-	return;//Á¾·á
+	return;//ì¢…ë£Œ
 }
 int main(void) {
-	FILE *in = fopen("input.txt", "r");//±³¼ö´Ô²²¼­ ÁÖ½Å input.txtÆÄÀÏ ÀĞ±â
-	FILE *ot = fopen("output.txt", "w");//°á°ú°ªÀ» output.txtÆÄÀÏ¿¡ Ãâ·Â
-	int n = 0;//º¯¼ö n¼±¾ğ
-	fscanf(in, "%d", &n);//50À» ¹Ş½À´Ï´Ù.
-	for (int i = 0; i < n; i++) {//50¹ø ¹İº¹
-		int nodeNumber = 0;//³ëµåÀÇ °³¼ö¸¦ ¹Ş±â À§ÇØ ¼±¾ğÇÏ¿´½À´Ï´Ù.
-		fscanf(in, "%d", &nodeNumber);//°¢°¢ÀÇ Å×½ºÆ® °ªÀÇ ³ëµå °³¼ö ¹Ş±â
-		char cmd[50] = { 0 };//¹®ÀÚ¿­ ¹Ş±âÀ§ÇØ¼­ ¼±¾ğÇÏ¿´½À´Ï´Ù.
-		fscanf(in, "%s", cmd);//¹®ÀÚ¿­ÀÇ ¹Ş°Ú½À´Ï´Ù.
-		treeNode *root = NULL;//root Á¤ÀÇÇÏ°Ú½À´Ï´Ù.
-		for (int j = 0; j < nodeNumber; j++) {//³ëµåÀÇ °¹¼ö¸¸Å­ ¹İº¹ÇÏ°Ú½À´Ï´Ù.
-			int data = 0;//»ğÀÔÇÒ µ¥ÀÌÅÍ°ªÀ» À§ÇØ ¼±¾ğÇÏ¿´½À´Ï´Ù.
-			fscanf(in, "%d", &data);//»ğÀÔÇÒ µ¥ÀÌÅÍ °ªÀ» ÀĞ±â 
-			root = BST_insert(root, data);//ÀĞÀº µ¥ÀÌÅÍ °ªÀ» bstÆ®¸®¸¦ ±×¸®±â À§ÇØ¼­ ÀÛ¼º
+	FILE *in = fopen("input.txt", "r");//êµìˆ˜ë‹˜ê»˜ì„œ ì£¼ì‹  input.txtíŒŒì¼ ì½ê¸°
+	FILE *ot = fopen("output.txt", "w");//ê²°ê³¼ê°’ì„ output.txtíŒŒì¼ì— ì¶œë ¥
+	int n = 0;//ë³€ìˆ˜ nì„ ì–¸
+	fscanf(in, "%d", &n);//50ì„ ë°›ìŠµë‹ˆë‹¤.
+	for (int i = 0; i < n; i++) {//50ë²ˆ ë°˜ë³µ
+		int nodeNumber = 0;//ë…¸ë“œì˜ ê°œìˆ˜ë¥¼ ë°›ê¸° ìœ„í•´ ì„ ì–¸í•˜ì˜€ìŠµë‹ˆë‹¤.
+		fscanf(in, "%d", &nodeNumber);//ê°ê°ì˜ í…ŒìŠ¤íŠ¸ ê°’ì˜ ë…¸ë“œ ê°œìˆ˜ ë°›ê¸°
+		char cmd[50] = { 0 };//ë¬¸ìì—´ ë°›ê¸°ìœ„í•´ì„œ ì„ ì–¸í•˜ì˜€ìŠµë‹ˆë‹¤.
+		fscanf(in, "%s", cmd);//ë¬¸ìì—´ì˜ ë°›ê² ìŠµë‹ˆë‹¤.
+		treeNode *root = NULL;//root ì •ì˜í•˜ê² ìŠµë‹ˆë‹¤.
+		for (int j = 0; j < nodeNumber; j++) {//ë…¸ë“œì˜ ê°¯ìˆ˜ë§Œí¼ ë°˜ë³µí•˜ê² ìŠµë‹ˆë‹¤.
+			int data = 0;//ì‚½ì…í•  ë°ì´í„°ê°’ì„ ìœ„í•´ ì„ ì–¸í•˜ì˜€ìŠµë‹ˆë‹¤.
+			fscanf(in, "%d", &data);//ì‚½ì…í•  ë°ì´í„° ê°’ì„ ì½ê¸° 
+			root = BST_insert(root, data);//ì½ì€ ë°ì´í„° ê°’ì„ bstíŠ¸ë¦¬ë¥¼ ê·¸ë¦¬ê¸° ìœ„í•´ì„œ ì‘ì„±
 		}
-		int aimNumber = 0;//¸î¹øÂ° Å½»ö°ªÀ» Á¤ÇÒÁö À§ÇØ ¼±¾ğÇÏ¿´½À´Ï´Ù.
-		sscanf(cmd + 4, "%d", &aimNumber);//dfs(n)ÀÇ °æ¿ì n°ªÀ» aimNumberÀÌ¶ó´Â º¯¼ö¿¡ ´ã±â À§ÇØ ÀÛ¼ºÇß½À´Ï´Ù.
-		int count = 1;//count´Â ¸î¹øÂ° ÀÎÁö ¾Ë±â À§ÇØ¼­ ÀÛ¼ºÇß½À´Ï´Ù
-		int answer = 0;//asnwerÀº n¹øÂ° Å½»ö°ªÀ» ÀúÀåÇÏ±â À§ÇØ ÀÛ¼ºÇÏ¿´½À´Ï´Ù.
-		if (cmd[0] == 'd') {//dfs·Î ÁøÇàÇØ¾ßÇÏ´Â °æ¿ìÀÔ´Ï´Ù.
-			DFS(root, &count, aimNumber, &answer);//dfsÇÔ¼ö·Î ÀÌµ¿
+		int aimNumber = 0;//ëª‡ë²ˆì§¸ íƒìƒ‰ê°’ì„ ì •í• ì§€ ìœ„í•´ ì„ ì–¸í•˜ì˜€ìŠµë‹ˆë‹¤.
+		sscanf(cmd + 4, "%d", &aimNumber);//dfs(n)ì˜ ê²½ìš° nê°’ì„ aimNumberì´ë¼ëŠ” ë³€ìˆ˜ì— ë‹´ê¸° ìœ„í•´ ì‘ì„±í–ˆìŠµë‹ˆë‹¤.
+		int count = 1;//countëŠ” ëª‡ë²ˆì§¸ ì¸ì§€ ì•Œê¸° ìœ„í•´ì„œ ì‘ì„±í–ˆìŠµë‹ˆë‹¤
+		int answer = 0;//asnwerì€ në²ˆì§¸ íƒìƒ‰ê°’ì„ ì €ì¥í•˜ê¸° ìœ„í•´ ì‘ì„±í•˜ì˜€ìŠµë‹ˆë‹¤.
+		if (cmd[0] == 'd') {//dfsë¡œ ì§„í–‰í•´ì•¼í•˜ëŠ” ê²½ìš°ì…ë‹ˆë‹¤.
+			DFS(root, &count, aimNumber, &answer);//dfsí•¨ìˆ˜ë¡œ ì´ë™
 		}
-		else {//bfs·Î ÁøÇàÇØ¾ß ÇÏ´Â °æ¿ìÀÔ´Ï´Ù.
-			BFS(root, &count, aimNumber, &answer);//bfsÇÔ¼ö·Î ÀÌµ¿
+		else {//bfsë¡œ ì§„í–‰í•´ì•¼ í•˜ëŠ” ê²½ìš°ì…ë‹ˆë‹¤.
+			BFS(root, &count, aimNumber, &answer);//bfsí•¨ìˆ˜ë¡œ ì´ë™
 		}
-		printf("%d\n", answer);//±³¼ö´ÔÀÌ Áï¼®À¸·Î º¸½Ã±â ÆíÇÏ°Ô ÄÜ¼ÖÃ¢µµ ¸¸µé¾ú½À´Ï´Ù.
-		fprintf(ot, "%d\n", answer);//output.txtÆÄÀÏ¿¡ °á°ú°ª Ãâ·Â
+		printf("%d\n", answer);//êµìˆ˜ë‹˜ì´ ì¦‰ì„ìœ¼ë¡œ ë³´ì‹œê¸° í¸í•˜ê²Œ ì½˜ì†”ì°½ë„ ë§Œë“¤ì—ˆìŠµë‹ˆë‹¤.
+		fprintf(ot, "%d\n", answer);//output.txtíŒŒì¼ì— ê²°ê³¼ê°’ ì¶œë ¥
 	}
-	fclose(in);//ÆÄÀÏ´İ±â
-	fclose(ot);//ÆÄÀÏ´İ±â
-	return 0;//0¹İÈ¯, Á¾·á
+	fclose(in);//íŒŒì¼ë‹«ê¸°
+	fclose(ot);//íŒŒì¼ë‹«ê¸°
+	return 0;//0ë°˜í™˜, ì¢…ë£Œ
 }
