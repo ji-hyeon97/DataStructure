@@ -68,7 +68,7 @@ void DFS(treeNode *root, int *count, int aimNumber, int *answer) {//dfs탐색
 		return;//종료
 	}
 	if (*count == aimNumber) {//count값이랑 aimNumber값이랑 같은 경우
-		*count += 1;
+		*count += 1;//ㅅㅂ 과제제출할때 왜이걸 생각 못햇지,, 아 자식 노드가 2개인 경우도 생각했어야 하는데 아 ㅁㅊ ㅋㅋㅋㅋ
 		*answer = root->data;//그 탐색값을 answer이라는 주소에 저장하겠습니다.
 		return;//종료
 	}
